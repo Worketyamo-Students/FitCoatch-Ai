@@ -1,8 +1,9 @@
-import { Request, Response } from 'express';
+import {  Response } from 'express';
 import { registerUser, loginUser } from '../core/services/authService';
+import { AuthenticatedRequest } from '../core/middlewares/authMiddleware';
 
 export const authController = {
-  register: async (req: Request, res: Response): Promise<void> => {
+  register: async (req: AuthenticatedRequest, res: Response): Promise<void> => {
     try {
       const user = await registerUser(req.body);
       res.status(201).json({
@@ -19,7 +20,7 @@ export const authController = {
     }
   },
 
-  login: async (req: Request, res: Response): Promise<void> => {
+  login: async (req: AuthenticatedRequest, res: Response): Promise<void> => {
     try {
       const { email, password } = req.body;
       const { token } = await loginUser(email, password);

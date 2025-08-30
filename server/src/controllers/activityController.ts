@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import {  Response } from 'express';
 import {
   createSportActivity,
   getSportActivities,
@@ -7,16 +7,12 @@ import {
   createSleepActivity,
   getSleepActivities
 } from '../core/services/activityService';
+import { AuthenticatedRequest } from '../core/middlewares/authMiddleware';
 
 export const activityController = {
-  createSport: async (req: Request, res: Response): Promise<void> => {
+  createSport: async (req: AuthenticatedRequest, res: Response): Promise<void> => {
     try {
-      const activity = await createSportActivity(req.user.userId, req.body);
-      res.status(201).json({
-        success: true,
-        data: activity,
-        message: 'Sport activity created successfully'
-      });
+
     } catch (error: any) {
       res.status(400).json({
         success: false,
@@ -26,14 +22,9 @@ export const activityController = {
     }
   },
 
-  getSportActivities: async (req: Request, res: Response): Promise<void> => {
+  getSportActivities: async (req: AuthenticatedRequest, res: Response): Promise<void> => {
     try {
-      const activities = await getSportActivities(req.user.userId);
-      res.json({
-        success: true,
-        data: activities,
-        message: 'Sport activities retrieved successfully'
-      });
+
     } catch (error: any) {
       res.status(400).json({
         success: false,
@@ -43,14 +34,9 @@ export const activityController = {
     }
   },
 
-  createNutrition: async (req: Request, res: Response): Promise<void> => {
+  createNutrition: async (req: AuthenticatedRequest, res: Response): Promise<void> => {
     try {
-      const activity = await createNutritionActivity(req.user.userId, req.body);
-      res.status(201).json({
-        success: true,
-        data: activity,
-        message: 'Nutrition activity created successfully'
-      });
+
     } catch (error: any) {
       res.status(400).json({
         success: false,
@@ -60,14 +46,9 @@ export const activityController = {
     }
   },
 
-  getNutritionActivities: async (req: Request, res: Response): Promise<void> => {
+  getNutritionActivities: async (req: AuthenticatedRequest, res: Response): Promise<void> => {
     try {
-      const activities = await getNutritionActivities(req.user.userId);
-      res.json({
-        success: true,
-        data: activities,
-        message: 'Nutrition activities retrieved successfully'
-      });
+
     } catch (error: any) {
       res.status(400).json({
         success: false,
@@ -77,14 +58,9 @@ export const activityController = {
     }
   },
 
-  createSleep: async (req: Request, res: Response): Promise<void> => {
+  createSleep: async (req: AuthenticatedRequest, res: Response): Promise<void> => {
     try {
-      const activity = await createSleepActivity(req.user.userId, req.body);
-      res.status(201).json({
-        success: true,
-        data: activity,
-        message: 'Sleep activity created successfully'
-      });
+
     } catch (error: any) {
       res.status(400).json({
         success: false,
@@ -96,12 +72,7 @@ export const activityController = {
 
   getSleepActivities: async (req: Request, res: Response): Promise<void> => {
     try {
-      const activities = await getSleepActivities(req.user.userId);
-      res.json({
-        success: true,
-        data: activities,
-        message: 'Sleep activities retrieved successfully'
-      });
+
     } catch (error: any) {
       res.status(400).json({
         success: false,

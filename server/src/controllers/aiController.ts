@@ -1,15 +1,11 @@
-import { Request, Response } from 'express';
+import {  Response } from 'express';
 import { generateProgram, nutritionAdvice, weeklySummary } from '../core/services/aiService';
+import { AuthenticatedRequest } from '../core/middlewares/authMiddleware';
 
 export const aiController = {
-  generateProgram: async (req: Request, res: Response): Promise<void> => {
+  generateProgram: async (req: AuthenticatedRequest, res: Response): Promise<void> => {
     try {
-      const program = await generateProgram(req.user.userId);
-      res.json({
-        success: true,
-        data: { program },
-        message: 'Program generated successfully'
-      });
+
     } catch (error: any) {
       res.status(400).json({
         success: false,
@@ -21,12 +17,7 @@ export const aiController = {
 
   nutritionAdvice: async (req: Request, res: Response): Promise<void> => {
     try {
-      const advice = await nutritionAdvice(req.user.userId);
-      res.json({
-        success: true,
-        data: { advice },
-        message: 'Nutrition advice generated successfully'
-      });
+
     } catch (error: any) {
       res.status(400).json({
         success: false,
@@ -38,12 +29,7 @@ export const aiController = {
 
   weeklySummary: async (req: Request, res: Response): Promise<void> => {
     try {
-      const summary = await weeklySummary(req.user.userId);
-      res.json({
-        success: true,
-        data: { summary },
-        message: 'Weekly summary generated successfully'
-      });
+
     } catch (error: any) {
       res.status(400).json({
         success: false,
