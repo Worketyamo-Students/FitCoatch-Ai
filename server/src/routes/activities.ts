@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { authenticate } from '../core/middlewares/authMiddleware';
+import  authenticate  from '../core/middlewares/authMiddleware';
 import { activityController } from '../controllers/activityController';
 
 const router: Router = express.Router();
