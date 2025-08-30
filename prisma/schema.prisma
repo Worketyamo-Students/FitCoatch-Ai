@@ -1,0 +1,55 @@
+datasource db {
+      provider = "mongodb"
+      url      = env("DATABASE_URL")
+    }
+
+    generator client {
+      provider = "prisma-client-js"
+    }
+
+    model User {
+      id            String       @id @default(auto()) @map("_id") @db.ObjectId
+      email         String       @unique
+      password      String
+      name          String?
+      createdAt     DateTime     @default(now())
+      updatedAt     DateTime     @updatedAt
+      sportActivities SportActivity[]
+      nutritionActivities NutritionActivity[]
+      sleepActivities SleepActivity[]
+    }
+
+    model SportActivity {
+      id            String       @id @default(auto()) @map("_id") @db.ObjectId
+      userId        String       @db.ObjectId
+      user          User         @relation(fields: [userId], references: [id])
+      activityType  String
+      duration      Int
+      calories      Int
+      date          DateTime
+      createdAt     DateTime     @default(now())
+      updatedAt     DateTime     @updatedAt
+    }
+
+    model NutritionActivity {
+      id            String       @id @default(auto()) @map("_id") @db.ObjectId
+      userId        String       @db.ObjectId
+      user          User         @relation(fields: [userId], references: [id])
+      mealType      String
+      foodItems     String
+      calories      Int
+      date          DateTime
+      createdAt     DateTime     @default(now())
+      updatedAt     DateTime     @updatedAt
+    }
+
+    model SleepActivity {
+      id            String       @id @default(auto()) @map("_id") @db.ObjectId
+      userId        String       @db.ObjectId
+      user          User         @relation(fields: [userId], references: [id])
+      duration      Int
+      quality       String
+      date          DateTime
+      createdAt     DateTime     @default(now())
+      updatedAt     DateTime     @updatedAt
+    }
